@@ -200,4 +200,11 @@ const priorHome=home;
 home=function(){priorHome();let box=el("section",undefined,"card");box.append(el("h2","Study tools and progress backup"),el("p","Use the same Safari browser each time. Export a backup before clearing browser data."));box.append(button("Export my study progress",()=>{let payload=JSON.stringify(state,null,2);let b=new Blob([payload],{type:"application/json"}),url=URL.createObjectURL(b),a=document.createElement("a");a.href=url;a.download="asp-master-progress.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),3000)},true),button("Flashcards",flashcards,true));app.append(box)};
 function flashcards(){let order=DATA.map((_,i)=>i).sort(()=>Math.random()-.5),at=0,shown=false;function draw(){let q=DATA[order[at]];header("Flashcards • "+(at+1)+" / "+order.length,q[0]);let c=el("section",undefined,"card");c.append(el("h2",q[1]));if(shown)c.append(el("p","Answer: "+q[2]),el("p",q[4],"note"));app.append(c);app.append(button(shown?"Next card":"Reveal answer",()=>{if(shown){at=(at+1)%order.length;shown=false}else shown=true;draw()}),button("Dashboard",home,true))}draw()}
 home();
+
+const OFFICIAL_MAP={"Risk Management":"Safety Management","Electrical Safety":"Safety Management","Construction Safety":"Safety Management"};
+DATA.forEach(q=>{if(OFFICIAL_MAP[q[0]])q[0]=OFFICIAL_MAP[q[0]]});
+topics.splice(0,topics.length,...DOMAINS.map(d=>d[0]));
+const originalQuestion=question;
+question=function(){if(deadline&&Date.now()>deadline){finish();return}originalQuestion()};
+home();
 </script></html>
