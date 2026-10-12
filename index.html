@@ -123,4 +123,37 @@ const BOOK={"Risk Management":"26 Risk Assessment and Management; 35 Prevention 
 const originalStudy=study;
 study=function(t){originalStudy(t);let c=el("section",undefined,"card");c.append(el("h2","Find this in your Kindle textbook"),el("p","W. David Yates, fourth edition: Chapter(s) "+(BOOK[t]||"Use the book's contents and index")+". Open Kindle Contents and select the chapter; use search for the specific term. Kindle page numbers vary.","note"));app.append(c)};
 home();
+
+const DOMAINS=[["Math & Metrics",10],["Safety Management",25],["Ergonomics",8],["Fire Protection",12],["Emergency Preparedness",10],["Industrial Hygiene",12],["Environmental",7],["Training",11],["Legal",5]];
+const EXTRA=[
+["Legal","What is risk transfer?","Shifting financial consequences by insurance or contract",["Shifting financial consequences by insurance or contract","Eliminating every physical hazard","Ignoring legal duties","Deleting incident records"],"Risk transfer changes who bears financial loss, not the physical hazard."],
+["Legal","Why preserve chain of custody?","Document evidence handling and integrity",["Document evidence handling and integrity","Replace sampling","Reduce training","Change test results"],"Documenting custody helps demonstrate sample integrity."],
+["Legal","What is essential in medical record management?","Privacy and required retention",["Privacy and required retention","Public disclosure","Immediate destruction","Unrestricted access"],"Control access and follow applicable retention requirements."],
+["Legal","What matters at a multi-employer worksite?","Coordination of overlapping safety duties",["Coordination of overlapping safety duties","Only one employer can have duties","No hazard communication","No contractor oversight"],"Multiple employers may share or have separate obligations."],
+["Legal","When outside a safety professional's expertise, what should they do?","Consult a qualified specialist",["Consult a qualified specialist","Guess","Conceal uncertainty","Ignore the problem"],"Professional judgment includes recognizing limits."],
+["Environmental","Which standard covers environmental management systems?","ISO 14001",["ISO 14001","ISO 45001","NFPA 70E","ANSI Z359"],"ISO 14001 is an EMS framework."],
+["Environmental","Which is preferred in waste management?","Source reduction",["Source reduction","Landfill disposal","Dilution","Uncontrolled burning"],"Avoiding waste generation is the priority."],
+["Environmental","What does ESG stand for?","Environmental, social, and governance",["Environmental, social, and governance","Emergency safety guide","Energy storage grid","Exposure sampling group"],"ESG addresses organizational impact and oversight."],
+["Training","What is the strongest evidence training worked?","Observed safe task performance",["Observed safe task performance","Attendance alone","Number of slides","Training duration"],"On-the-job demonstration checks transfer."],
+["Training","What does training needs analysis compare?","Current and required competency",["Current and required competency","Job titles only","Training budgets only","Shift length"],"Competency gaps guide instruction."],
+["Ergonomics","What does RULA evaluate?","Upper-limb postural risk",["Upper-limb postural risk","Fire load","Radiation exposure","Airflow"],"RULA is a screening method for upper-limb ergonomics."],
+["Ergonomics","What is anthropometry?","Measurement of human body dimensions",["Measurement of human body dimensions","Noise monitoring","Electrical resistance","Air sampling"],"Body dimensions inform workspace design."],
+["Fire Protection","Which fire class involves combustible metals?","Class D",["Class D","Class A","Class B","Class C"],"Class D covers combustible metals."],
+["Fire Protection","Which fire class involves cooking oils and fats?","Class K",["Class K","Class A","Class B","Class C"],"Class K applies to cooking media."],
+["Fire Protection","Why bond and ground during flammable liquid transfer?","Reduce static discharge ignition risk",["Reduce static discharge ignition risk","Increase vapor pressure","Replace ventilation","Increase flow rate"],"Bonding and grounding help control static electricity."],
+["Emergency Preparedness","What is incident command used for?","Coordinating response roles and resources",["Coordinating response roles and resources","Replacing all drills","Only payroll","Only equipment maintenance"],"ICS establishes a coordinated response structure."],
+["Emergency Preparedness","What is business continuity planning?","Maintaining and restoring critical operations",["Maintaining and restoring critical operations","Only first aid","Only alarm testing","Only insurance claims"],"Continuity plans prepare for disruption."],
+["Industrial Hygiene","What does STEL describe?","Short-duration exposure limit",["Short-duration exposure limit","Lifetime exposure","Fire resistance","Annual incident rate"],"STEL is a short averaging period limit."],
+["Industrial Hygiene","What does IDLH mean?","Immediately dangerous to life or health",["Immediately dangerous to life or health","Indoor daily light hours","Industrial design lift height","Immediate dust history"],"IDLH indicates severe acute danger."],
+["Industrial Hygiene","What happens to point-source radiation intensity when distance doubles?","It drops to one-quarter",["It drops to one-quarter","It doubles","It stays constant","It quadruples"],"Inverse-square law."],
+["Math & Metrics","Current at 12 volts with 4 ohms resistance?","3 amperes",["3 amperes","48 amperes","0.3 amperes","16 amperes"],"Ohm's law I = V/R."],
+["Math & Metrics","Mean of 4, 6, 8 and 10?","7",["7","6","8","28"],"28 divided by 4 equals 7."],
+["Math & Metrics","80 grams after three half-lives?","10 grams",["10 grams","20 grams","40 grams","5 grams"],"80 to 40 to 20 to 10."],
+["Safety Management","What does FMEA examine?","Failure modes and their effects",["Failure modes and their effects","Only training records","Only PPE costs","Only worker attendance"],"FMEA identifies potential failure mechanisms."],
+["Safety Management","What is management of change for?","Evaluating hazards from modifications",["Evaluating hazards from modifications","Avoiding all equipment changes","Replacing audits","Only controlling costs"],"Changes may introduce new hazards."],
+["Safety Management","Which document details chemical hazards?","Safety data sheet",["Safety data sheet","Timecard","Purchase order","Invoice"],"An SDS supports chemical hazard communication."]
+];DATA.push(...EXTRA);topics.splice(0,topics.length,...DOMAINS.map(d=>d[0]));
+const baseHome2=home;
+home=function(){baseHome2();let c=el("section",undefined,"card");c.append(el("h2","ASP11 blueprint coverage"));DOMAINS.forEach(d=>{let x=el("p",d[0]+" — "+d[1]+"% exam weight");c.append(x)});c.append(el("p","Some questions cover overlapping topics; the bank is not a validated exam simulation.","muted"));app.append(c)};
+home();
 </script></html>
