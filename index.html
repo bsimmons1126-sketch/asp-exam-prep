@@ -238,4 +238,24 @@ const _aspStudy=study;
 study=function(topic){_aspStudy(topic);let cards=[...app.querySelectorAll("section.card")];cards.forEach(c=>{let heading=c.querySelector("h2");if(heading&&c.querySelector("p.note")&&c.querySelector("p.note").textContent.startsWith("Key concept:"))compactCard(c,heading.textContent)})};
 const extraCss=document.createElement("style");extraCss.textContent=".asp-collapse{border-radius:12px}.asp-collapse>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:750;font-size:17px;padding:12px 4px;line-height:1.35}.asp-collapse>summary::-webkit-details-marker{display:none}.asp-collapse>summary:after{content:'+';font-size:25px;color:#f5b942;flex-shrink:0}.asp-collapse[open]>summary:after{content:'−'}.asp-collapse[open]>summary{border-bottom:1px solid #344662;margin-bottom:10px}.asp-collapse button{margin-top:10px}details:focus-visible,summary:focus-visible{outline:3px solid #f5b942;outline-offset:3px}";document.head.append(extraCss);
 home();
+
+/* Entire study-plan panel can be collapsed, independently of subject accordions. */
+const _aspHomePanel=home;
+home=function(){
+  _aspHomePanel();
+  const panel=[...app.querySelectorAll("section.card")].find(c=>c.querySelector("h2")?.textContent==="Study plan & Kindle references");
+  if(!panel)return;
+  const wrapper=document.createElement("details");
+  wrapper.className="asp-collapse asp-plan-panel";
+  const heading=panel.querySelector("h2");
+  const summary=document.createElement("summary");
+  summary.textContent="Study plan & Kindle references";
+  wrapper.append(summary);
+  if(heading)heading.remove();
+  while(panel.firstChild)wrapper.append(panel.firstChild);
+  panel.append(wrapper);
+};
+const aspPanelStyle=document.createElement("style");
+aspPanelStyle.textContent=".asp-plan-panel>summary{font-size:21px;font-weight:800;padding:14px 0}.asp-plan-panel[open]>summary{margin-bottom:14px}.asp-plan-panel:not([open]){min-height:0}";document.head.append(aspPanelStyle);
+home();
 </script></html>
