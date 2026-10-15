@@ -278,4 +278,27 @@ home=function(){
   if(diagnostic)diagnostic.after(card);else app.append(card);
 };
 home();
+
+/* Keep the existing mock-exam entry point aligned with the new challenge bank. */
+const _challengeHomeFinal=home;
+home=function(){
+  _challengeHomeFinal();
+  [...app.querySelectorAll("button")].filter(b=>b.textContent.trim()==="Timed mock exam").forEach(b=>{
+    b.textContent="100-question timed mock • 120 min";
+    b.onclick=()=>challengeMock(100,120);
+  });
+};
+const _challengeQuestionDisplay=question;
+question=function(){
+  _challengeQuestionDisplay();
+  if(deadline){
+    [...app.querySelectorAll("small")].forEach(node=>{
+      if(node.textContent.includes("Timed session:")){
+        const remaining=Math.max(0,Math.ceil((deadline-Date.now())/60000));
+        node.textContent="Timed session: approximately "+remaining+" minutes remaining. Time is checked when you answer or advance.";
+      }
+    });
+  }
+};
+home();
 </script></html>
